@@ -8,12 +8,22 @@ See https://github.com/hbz/lobid-organisations/issues/419.
 Atm not all queries result accurate data, so there is room for proper configuration and data input.
 
 # Setup
-
+Change to the proper directory:
+```bash
+$ cd pelias/project/lobid_DACH/
+```
 Please refer to the instructions at https://github.com/pelias/docker in order to install and configure your docker environment.
 
 The minimum configuration required in order to run this project are [installing prerequisites](https://github.com/pelias/docker#prerequisites), [install the pelias command](https://github.com/pelias/docker#installing-the-pelias-command) and [configure the environment](https://github.com/pelias/docker#configure-environment).
 
 Please ensure that's all working fine before continuing.
+
+Tweak elasticsearch to use 8GB:
+```bash
+$ docker exec -u 0 -it pelias_elasticsearch bash
+$ vi config/jvm.options # here change the -Xmx and -Xms to 8GB
+$ pelias elasticsearch stop; pelias elasticsearch start; # restart elasticseach
+```
 
 # Run a Build
 
