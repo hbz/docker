@@ -16,7 +16,9 @@
         "number_of_replicas": "0",
         "number_of_shards": "1"
       }
-    }
+    },
+    "restart": "always",
+    "environment": [ "ES_JAVA_OPTS=-Xmx8g" ]
   },
   "acceptance-tests": {
     "endpoints": {
@@ -36,13 +38,16 @@
       "focus.point.lon": 6.95428
     }
   },
+  "logger": {
+    "level": "info"
+  },
   "imports": {
     "adminLookup": {
       "enabled": true
     },
     "geonames": {
       "datapath": "/data/geonames",
-      "countryCode": "de" 
+      "countryCode": "ALL"
     },
     "openstreetmap": {
       "leveldbpath": "/tmp",
@@ -76,15 +81,23 @@
     },
     "polyline": {
       "datapath": "/data/polylines",
-      "files": ["extract.0sv"]
+      "files": ["planet-latest-valhalla.polylines.0sv"]
     },
     "whosonfirst": {
-	  "datapath": "/data/whosonfirst/",
-      "importVenues": false,
-      "importPostalcodes": true
+      "datapath": "/data/whosonfirst",
+      "importPostalcodes": true,
+      "importPlace": [
+         "85633111",
+         "85632785",
+         "85633051"
+      ],
+      "sqlite": true
     },
-	 "interpolation": {
+    "services": {
+      "pip": { "url": "http://pip:4200" }
+    },
+    "interpolation": {
         "datapath": "/data/interpolation/"
-  	}
-   }
+    }
+  }
 }
